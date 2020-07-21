@@ -19,6 +19,7 @@ def driver():
         with webdriver.Remote(command_executor='http://127.0.0.1:9515') as driver:
             yield driver
 
+
 @pytest.fixture
 def user_client(client, live_server, driver):
     user = User.objects.create_user(
@@ -34,4 +35,11 @@ def user_client(client, live_server, driver):
     submit = driver.find_element_by_css_selector('[data-test="submit"]')
     submit.click()
 
-    return user_client            
+    return user_client
+
+@pytest.fixture
+def default_users():
+    user = User.objects.create(
+        username='user1',
+        password='pass1'
+    )

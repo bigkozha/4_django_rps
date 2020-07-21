@@ -1,5 +1,6 @@
-<!-- {% for game in games %}
-    <p data-test="game"><a href="/game_detail/{{game.id}}">{{game.id}}</a> {{game.is_active}}</p>
-{% endfor %} -->
+{% extends "base.html" %}
+{% block content %}
 
-<a data-test="new_game" href="/new_game/">Start a new game</a>
+<a data-test="new_game" href="{% url 'new_game' %}">Start a new game</a>
+
+{% endblock %}
