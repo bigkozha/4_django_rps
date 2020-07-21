@@ -1,5 +1,7 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from .forms import NewGameForm
+from .models import Game
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -7,10 +9,15 @@ def index(request):
 
 
 def new_game(request):
-    form = NewGameForm()
+    if request.method == 'GET':
+        form = NewGameForm(request.user)
+        return render(request, 'new_game.html', {'form': form})
 
-    context = {
-        'form': form
-    }
+    instance = Game.objects.create(is_active=True)
+    return redirect('game_detail', game_id=instance.id)
 
-    return render(request, 'new_game.html', context)
+
+def game_detail(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+
+    return render(request, 'game_detail.html')

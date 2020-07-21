@@ -9,4 +9,5 @@ urlpatterns = [
     path('accounts/login/', account_views.login_view, name='login'),
     path('new_game/', views.new_game, name='new_game'),
     path('admin/', admin.site.urls),
+    path('game_detail/<int:game_id>', views.game_detail, name='game_detail'),
 ]

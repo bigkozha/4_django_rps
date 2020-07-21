@@ -1,10 +1,10 @@
-
 import os
 
 import pytest
 from django.contrib.auth.models import User
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
 
 @pytest.yield_fixture(scope="session")
 def driver():
@@ -37,9 +37,14 @@ def user_client(client, live_server, driver):
 
     return user_client
 
+
 @pytest.fixture
 def default_users():
-    user = User.objects.create(
+    User.objects.create(
         username='user1',
+        password='pass1'
+    )
+    User.objects.create(
+        username='user2',
         password='pass1'
     )

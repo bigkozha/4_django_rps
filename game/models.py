@@ -4,7 +4,7 @@ from django.db import models
 
 class Game(models.Model):
     is_active = models.BooleanField(default=True)
-    winner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    winner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
 
 class Move():
