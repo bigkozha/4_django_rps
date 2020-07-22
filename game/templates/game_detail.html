@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
-<p>hi</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input data-test="submit" type="submit" value="submit" />
+</form>
+
+{% for move in moves %}
+<p data-test="move_item">{{ move.time }} {{ move.move_kind }} {{ move.gamer }}</p>
+{% endfor %}
 
 {% endblock %}

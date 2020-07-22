@@ -7,7 +7,17 @@ class Game(models.Model):
     winner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
 
-class Move():
+class Move(models.Model):
     time = models.DateField(auto_now=False, auto_now_add=True)
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='moves')
     gamer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    move_kind = models.ForeignKey('MoveKind', on_delete=models.DO_NOTHING)
+
+
+class MoveKind(models.Model):
+    name = models.CharField(max_length=255)
+    win_to = models.ForeignKey('MoveKind', on_delete=models.DO_NOTHING, related_name='movekind_winto', null=True)
+    lose_to = models.ForeignKey('MoveKind', on_delete=models.DO_NOTHING, related_name='movekind_losto', null=True)
+
+    def __str__(self):
+        return self.name
