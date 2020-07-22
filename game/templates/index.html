@@ -2,5 +2,8 @@
 {% block content %}
 
 <a data-test="new_game" href="{% url 'new_game' %}">Start a new game</a>
+{% for game in games %}
+<p data-test="game"><a href="/game_detail/{{game.id}}">{{game.id}}</a> {{game.is_active}} {{game.winner}}</p>
+{% endfor %}
 
 {% endblock %}

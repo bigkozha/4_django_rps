@@ -5,6 +5,8 @@ from django.db import models
 class Game(models.Model):
     is_active = models.BooleanField(default=True)
     winner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    player1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='game_player1')
+    player2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='game_player2')
 
 
 class Move(models.Model):

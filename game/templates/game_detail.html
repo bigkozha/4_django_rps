@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if game.is_active %}
+
 <form method="POST">
     {% csrf_token %}
     {{ form }}
     <input data-test="submit" type="submit" value="submit" />
 </form>
+{% endif %}
 
 {% for move in moves %}
 <p data-test="move_item">{{ move.time }} {{ move.move_kind }} {{ move.gamer }}</p>
 {% endfor %}
+
+{% if not game.is_active %}
+<h2 data-test="is_over">The game is over. Winner {{ game.winner }}</h2>
+{% endif %}
+
 
 {% endblock %}

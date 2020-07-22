@@ -13,4 +13,4 @@ class NewGameForm(forms.Form):
 
 
 class GameDetailForm(forms.Form):
-    movekind = forms.ModelChoiceField(queryset=MoveKind.objects.all(), widget=forms.Select(attrs={'data-test': 'movekind'}))
+    move_kind = forms.ModelChoiceField(queryset=MoveKind.objects.all(), widget=forms.Select(attrs={'data-test': 'move_kind'}))
