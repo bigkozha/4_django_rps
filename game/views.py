@@ -35,7 +35,7 @@ def game_detail(request, game_id):
     for x, y in zip(moves, moves[1:]):
         score.append(who_won_round(x.move_kind.name, y.move_kind.name))
 
-    if len(moves) >= 6:
+    if len(moves) >= 6 and len(moves) % 2 == 0:
         winner_index = who_won_game(moves)
         game.is_active = False
         if winner_index != 2:
