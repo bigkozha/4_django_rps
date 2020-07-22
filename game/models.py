@@ -5,8 +5,10 @@ from django.db import models
 class Game(models.Model):
     is_active = models.BooleanField(default=True)
     winner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    player1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='game_player1')
-    player2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name='game_player2')
+    player1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                null=True, related_name='game_player1')
+    player2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                null=True, related_name='game_player2')
 
 
 class Move(models.Model):
@@ -18,8 +20,6 @@ class Move(models.Model):
 
 class MoveKind(models.Model):
     name = models.CharField(max_length=255)
-    win_to = models.ForeignKey('MoveKind', on_delete=models.DO_NOTHING, related_name='movekind_winto', null=True)
-    lose_to = models.ForeignKey('MoveKind', on_delete=models.DO_NOTHING, related_name='movekind_losto', null=True)
 
     def __str__(self):
         return self.name

@@ -1,11 +1,12 @@
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import NewGameForm, GameDetailForm
-from .models import Game, MoveKind, Move
+from .forms import GameDetailForm, NewGameForm
+from .models import Game, Move, MoveKind
 
 
+@login_required
 def index(request):
     # MoveKind.objects.create(name='Scissors', win_to=MoveKind.objects.create(
     #    name='Papper'), lose_to=MoveKind.objects.create(name='Stone'))
@@ -13,6 +14,7 @@ def index(request):
     return render(request, 'index.html', {'games': games})
 
 
+@login_required
 def new_game(request):
     if request.method == 'GET':
         form = NewGameForm(request.user)
